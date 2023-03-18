@@ -1,0 +1,15 @@
+[tool.pdm]
+
+[project]
+name = ""
+version = ""
+description = ""
+authors = [
+    {name = "Ezra", email = ""},
+]
+dependencies = [
+    "django>=4.1.7",
+    "Pillow>=9.4.0",
+]
+requires-python = ">=3.10"
+license = {text = "MIT"}

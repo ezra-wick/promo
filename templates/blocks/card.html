@@ -1,0 +1,10 @@
+{% load static %}
+
+<div class="card">
+    <img src="{{ block.image }}" class="card-img-top" alt="{{ block.title }}">
+    <div class="card-body">
+        <h5 class="card-title">{{ block.title }}</h5>
+        <p class="card-text">{{ block.content|linebreaks|safe }}</p>
+        <a href="#" class="btn btn-primary">{{ block.cta }}</a>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}IT Company{% endblock %}
+
+<style>
+  .btn-purple {
+    background-color: purple;
+    border-color: purple;
+  }
+</style>
+
+{% block content %}
+  <!-- Hero section -->
+  <section class="bg-light py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 order-md-2">
+          <img src="{% static 'assets/hero.jpg' %}" class="img-fluid rounded shadow-lg">
+        </div>
+        <div class="col-md-6 my-auto">
+          <h1 class="display-5 mb-3">Маленькая IT компания</h1>
+          <p class="lead mb-4">Мы создаем уникальные решения для вашего бизнеса</p>
+          <a href="#" class="btn btn-primary btn-lg">Узнать больше</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% for block in page_blocks %}
+    {% include block.template with block=block %}
+  {% endfor %}
+  <section class="bg-light py-5">
+  </section>
+{% endblock %}

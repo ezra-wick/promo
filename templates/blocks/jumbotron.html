@@ -1,0 +1,8 @@
+{% load static %}
+
+<div class="jumbotron">
+    <div class="container">
+        <h1 class="display-4">{{ block.title }}</h1>
+        <p class="lead">{{ block.content|linebreaks|safe }}</p>
+    </div>
+</div>
