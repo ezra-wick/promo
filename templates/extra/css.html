@@ -1,0 +1,171 @@
+{% load static interactive %}    
+    <style>
+        :root {
+          --bs-primary: {{ theme_settings.primary_color }};
+          --bs-secondary: {{ theme_settings.secondary_color }};
+          --bs-success: {{ theme_settings.success_color }};
+          --bs-info: {{ theme_settings.info_color }};
+          --bs-warning: {{ theme_settings.warning_color }};
+          --bs-danger: {{ theme_settings.danger_color }};
+          --bs-light: {{ theme_settings.light_color }};
+          --bs-dark: {{ theme_settings.dark_color }};
+        }
+      
+        .btn-primary,
+        .btn-secondary,
+        .btn-success,
+        .btn-info,
+        .btn-warning,
+        .btn-danger,
+        .btn-light,
+        .btn-dark {
+          border: 1px solid transparent;
+        }
+      
+        .btn-primary {
+          background-color: var(--bs-primary);
+          border-color: {{ theme_settings.primary_color|darken_color:10 }};
+        }
+      
+        .btn-secondary {
+          background-color: var(--bs-secondary);
+          border-color: {{ theme_settings.secondary_color|darken_color:10 }};
+        }
+      
+        .btn-success {
+          background-color: var(--bs-success);
+          border-color: {{ theme_settings.success_color|darken_color:10 }};
+        }
+      
+        .btn-info {
+          background-color: var(--bs-info);
+          border-color: {{ theme_settings.info_color|darken_color:10 }};
+        }
+      
+        .btn-warning {
+          background-color: var(--bs-warning);
+          border-color: {{ theme_settings.warning_color|darken_color:10 }};
+        }
+      
+        .btn-danger {
+          background-color: var(--bs-danger);
+          border-color: {{ theme_settings.danger_color|darken_color:10 }};
+        }
+      
+        .btn-light {
+          background-color: var(--bs-light);
+          border-color: {{ theme_settings.light_color|darken_color:10 }};
+        }
+      
+        .btn-dark {
+          background-color: var(--bs-dark);
+          border-color: {{ theme_settings.dark_color|darken_color:10 }};
+        }
+      
+        .btn-primary:hover {
+          background-color: {{ theme_settings.primary_color|darken_color:10 }};
+          border: 1px solid transparent;
+        }
+      
+        .btn-secondary:hover {
+          background-color: {{ theme_settings.secondary_color|darken_color:10 }};
+          border: 1px solid transparent;
+        }
+      
+        .btn-success:hover {
+          background-color: {{ theme_settings.success_color|darken_color:10 }};
+          border: 1px solid transparent;
+        }
+      
+        .btn-info:hover {
+          background-color: {{ theme_settings.info_color|darken_color:10 }};
+          border: 1px solid transparent;
+        }
+      
+        .btn-warning:hover {
+          background-color: {{ theme_settings.warning_color|darken_color:10 }};
+          border: 1px solid transparent;
+        }
+      
+        .btn-danger:hover {
+          background-color: {{ theme_settings.danger_color|darken_color:10 }};
+          border: 1px solid transparent;
+        }
+      
+        .btn-light:hover {
+          background-color: {{ theme_settings.light_color|darken_color:10 }};
+          border: 1px solid transparent;
+        }
+      
+        .btn-dark:hover {
+          background-color: {{ theme_settings.dark_color|darken_color:10 }};
+          border: 1px solid transparent;
+        }
+      
+        .btn-primary:active, .btn-primary:focus, .btn-primary:active:focus {
+          background-color: {{ theme_settings.primary_color|darken_color:20 }};
+          box-shadow: none;
+          border: 1px solid transparent;
+        }
+      
+        .btn-secondary:active, .btn-secondary:focus {
+          background-color: {{ theme_settings.secondary_color|darken_color:20 }};
+        }
+      
+        .btn-success:active, .btn-success:focus {
+          background-color: {{ theme_settings.success_color|darken_color:20 }};
+        }
+      
+        .btn-info:active, .btn-info:focus {
+          background-color: {{ theme_settings.info_color|darken_color:20 }};
+        }
+      
+        .btn-warning:active, .btn-warning:focus {
+          background-color: {{ theme_settings.warning_color|darken_color:20 }};
+        }
+      
+        .btn-danger:active, .btn-danger:focus {
+          background-color: {{ theme_settings.danger_color|darken_color:20 }};
+        }
+      
+        .btn-light:active, .btn-light:focus {
+          background-color: {{ theme_settings.light_color|darken_color:20 }};
+        }
+      
+        .btn-dark:active, .btn-dark:focus {
+          background-color: {{ theme_settings.dark_color|darken_color:20 }};
+        }
+        .bg-primary {
+          background-color: {{ theme_settings.primary_color }} !important;
+        }
+      
+        .bg-secondary {
+          background-color: {{ theme_settings.secondary_color }} !important;
+        }
+      
+        .bg-success {
+          background-color: {{ theme_settings.success_color }} !important;
+        }
+      
+        .bg-info {
+          background-color: {{ theme_settings.info_color }} !important;
+        }
+      
+        .bg-warning {
+          background-color: {{ theme_settings.warning_color }} !important;
+        }
+      
+        .bg-danger {
+          background-color: {{ theme_settings.danger_color }} !important;
+        }
+      
+        .bg-light {
+          background-color: {{ theme_settings.light_color }} !important;
+        }
+      
+        .bg-dark {
+          background-color: {{ theme_settings.dark_color }} !important;
+        }
+ 
+      </style>
+      

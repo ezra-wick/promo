@@ -1,0 +1,101 @@
+{% load static %}
+
+<!-- Include Glide CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/css/glide.core.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/css/glide.theme.min.css">
+<!-- Include Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<!-- Include baguetteBox CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.0/baguetteBox.min.css">
+
+<!-- Include baguetteBox JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.0/baguetteBox.min.js"></script>
+<!-- Include Glide JS -->
+<script src="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.4.1/dist/glide.min.js"></script>
+
+<style>
+        /* Remove background and change color of arrows */
+    .glide__arrow {
+        background: none;
+    }
+    .glide__arrow i {
+        color: #000;
+        font-size: 24px;
+    }
+</style>
+<div class="gallery py-5">
+    <!-- Gallery container -->
+    <div class="glide p-5">
+        <h3>{{block.seo_title}}</h3>
+        <!-- Slider wrapper -->
+        <div class="glide__track" data-glide-el="track">
+            <ul class="glide__slides">
+                {% for photo in block.photos.all %}
+                <li class="glide__slide gallery-item">
+                    <a href="{{ photo.cropped_image.url }}" data-baguette>
+                        <img src="{{ photo.cropped_image.url }}" class="d-block w-100" alt="Photo {{ photo.order }}">
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Slider navigation arrows -->
+        <div class="glide__arrows" data-glide-el="controls">
+            <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="fas fa-chevron-left"></i></button>
+            <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Initialize Glide -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var glide = new Glide('.glide', {
+          type: 'carousel',
+          perView: getPerView(),
+          gap: 16,
+          loop: true,
+          autoplay: false,
+          animationDuration: 500, // Установите скорость анимации (500мс)
+        });
+      
+        glide.mount();
+      
+        window.addEventListener('resize', function() {
+          glide.update({
+            perView: getPerView()
+          })
+        })
+      });
+      
+      function getPerView() {
+        var screenWidth = window.innerWidth;
+        if (screenWidth < 768) { // Самый маленький экран
+          return 2;
+        } else if (screenWidth < 992) { // Средний экран
+          return 3;
+        } else { // Большой экран
+          return 4;
+        }
+      }
+      
+      baguetteBox.run('.gallery', {
+        animation: 'fadeIn',
+        buttons: 'auto',
+        async: true,
+        fullScreen: true,
+        noScrollbars: true,
+        overlayBackgroundColor: 'rgba(0, 0, 0, 0.8)',
+        // Добавить обработчик события beforeShow
+        onBeforeShow: function(instance) {
+          // Проверить, является ли режим полноэкранным
+          if (instance.gallery.classList.contains('full-screen')) {
+            // Заменить src изображения на original_image
+            instance.currentImage.src = instance.currentImage.href = instance.currentImage.dataset.original;
+          }
+        }
+      });      
+</script>

@@ -1,0 +1,88 @@
+<div class="modal fade text-dark" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="feedbackModalLabel">Форма обратной связи</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+            </div>
+            <div class="modal-body">
+                <form id="feedbackForm" action="{% url 'feedback' %}" method="POST">
+                    {% csrf_token %}
+                    {{ feedback_form.as_p }}
+                    <button type="submit" class="btn btn-primary">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+        async function submitForm(event) {
+            event.preventDefault();
+            const form = event.target;
+            const formData = new FormData(form);
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'X-CSRFToken': csrfToken
+                    },
+                    body: new URLSearchParams(formData)
+                });
+    
+                const data = await response.json();
+    
+                if (response.ok) {
+                    // Ваш код для обработки успешного ответа
+                    console.log("Форма успешно отправлена:", data);
+                    $("#feedbackModal").modal("hide");
+                    showNotification('success', data.message)
+
+                    form.reset();
+                } else {
+                    // Ваш код для обработки ошибок в форме
+                    console.error("Ошибки в форме:", data);
+                    displayFormErrors(data, form);
+                }
+            } catch (error) {
+                console.error("Ошибка при отправке формы:", error);
+            }
+        }
+    
+        function displayFormErrors(errors, form) {
+            // Удаляем предыдущие сообщения об ошибках
+            const oldErrorMessages = form.querySelectorAll('.error-message');
+            oldErrorMessages.forEach(message => message.remove());
+        
+            for (const field in errors) {
+                if (errors.hasOwnProperty(field)) {
+                    const errorMessages = errors[field];
+                    const inputField = form.querySelector(`[name="${field}"]`);
+        
+                    if (inputField) {
+                        const errorMessage = document.createElement('div');
+                        errorMessage.classList.add('error-message', 'text-danger', 'mt-2');
+                        errorMessage.innerText = errorMessages.join(', ');
+        
+                        inputField.classList.add('is-invalid');
+                        inputField.parentNode.appendChild(errorMessage);
+        
+                        inputField.addEventListener('input', () => {
+                            inputField.classList.remove('is-invalid');
+                            errorMessage.remove();
+                        });
+                    }
+                }
+            }
+        }
+        
+        const feedbackForm = document.getElementById('feedbackForm');
+        feedbackForm.addEventListener('submit', submitForm);
+
+        
+</script>
+    

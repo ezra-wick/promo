@@ -1,12 +1,21 @@
 from django import forms
 from main.models import FeedBack
 from django.utils.translation import gettext_lazy as _
+from django.core.validators import RegexValidator
+
+
+russian_phone_regex = RegexValidator(
+    regex=r'^\+7\d{10}$',
+    message="Номер телефона должен быть в формате: '+7XXXXXXXXXX'"
+)
 
 
 class FeedBackForm(forms.ModelForm):
-    phone = forms.CharField(widget=forms.TextInput(
-        attrs={'class': 'col-12 btn-outline border border-info rounded btn-lg', 'placeholder': "Ваш телефон"}),
-                            required=False)
+    phone = forms.CharField(
+        validators=[russian_phone_regex],
+        widget=forms.TextInput(
+            attrs={'class': 'col-12 btn-outline border border-info rounded btn-lg', 'placeholder': "Ваш телефон"}),
+        required=False)
     name = forms.CharField(
         widget=forms.TextInput(attrs={'class': 'col-12 border border-info rounded btn-lg', 'placeholder': "Ваше имя"}),
         required=True)
