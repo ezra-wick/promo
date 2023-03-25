@@ -24,29 +24,31 @@
         font-size: 24px;
     }
 </style>
-<div class="gallery py-5">
-    <!-- Gallery container -->
-    <div class="glide p-5">
-        <h3>{{block.seo_title}}</h3>
-        <!-- Slider wrapper -->
-        <div class="glide__track" data-glide-el="track">
-            <ul class="glide__slides">
-                {% for photo in block.photos.all %}
-                <li class="glide__slide gallery-item">
-                    <a href="{{ photo.cropped_image.url }}" data-baguette>
-                        <img src="{{ photo.cropped_image.url }}" class="d-block w-100" alt="Photo {{ photo.order }}">
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
+<div class="container py-5">
+  <div class="gallery py-5">
+      <!-- Gallery container -->
+      <div class="glide p-5">
+          <h3>{{block.seo_title}}</h3>
+          <!-- Slider wrapper -->
+          <div class="glide__track" data-glide-el="track">
+              <ul class="glide__slides">
+                  {% for photo in block.photos.all %}
+                  <li class="glide__slide gallery-item">
+                      <a href="{{ photo.cropped_image.url }}" data-baguette>
+                          <img src="{{ photo.cropped_image.url }}" class="d-block w-100" alt="Photo {{ photo.order }}">
+                      </a>
+                  </li>
+                  {% endfor %}
+              </ul>
+          </div>
 
-        <!-- Slider navigation arrows -->
-        <div class="glide__arrows" data-glide-el="controls">
-            <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="fas fa-chevron-left"></i></button>
-            <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="fas fa-chevron-right"></i></button>
-        </div>
-    </div>
+          <!-- Slider navigation arrows -->
+          <div class="glide__arrows" data-glide-el="controls">
+              <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="fas fa-chevron-left"></i></button>
+              <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="fas fa-chevron-right"></i></button>
+          </div>
+      </div>
+  </div>
 </div>
 
 

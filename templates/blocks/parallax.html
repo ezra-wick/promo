@@ -1,10 +1,27 @@
-<div class="container">
+<style>
+    .parallax-card {
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        height: 400px;
+    }
+
+    .parallax-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+    }
+</style>
+
+<div class="container py-5">
     <div class="row">
         <div class="col-12">
-            <div class="parallax-card bg-image" style="background-image: url('{{ page_block.image.url }}');">
+            <div class="parallax-card bg-image" style="background-image: url('{% if block.image %}{{ block.image.url }}{% endif %}');">
                 <div class="parallax-content">
-                    <h1 class="display-4 text-white">{{ page_block.title }}</h1>
-                    <p class="lead text-white">{{ page_block.content|safe }}</p>
+                    <h1 class="display-4 text-white">{{ block.title }}</h1>
+                    <p class="lead text-white">{{ block.content|safe }}</p>
                 </div>
             </div>
         </div>
