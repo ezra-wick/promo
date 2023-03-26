@@ -121,11 +121,15 @@ class Photo(models.Model):
     def __str__(self):
         return f"Фото {self.pk} (Блок: {self.page_block.title})"
 
-
     def crop_image(self):
         image = Image.open(self.original_image.path)
         # Здесь вы можете изменить размеры и параметры обрезки, если хотите
         cropped_image = image.resize((300, 300), Image.ANTIALIAS).crop((0, 0, 300, 300))
+        
+        # Convert the image to RGB mode if it has an alpha channel
+        if cropped_image.mode == 'RGBA':
+            cropped_image = cropped_image.convert('RGB')
+
         # Сохраняем обрезанное изображение
         temp_image = BytesIO()
         cropped_image.save(temp_image, format='JPEG')

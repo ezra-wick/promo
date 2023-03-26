@@ -24,11 +24,12 @@
         font-size: 24px;
     }
 </style>
-<div class="container py-5">
-  <div class="gallery py-5">
+<div class="container-lg py-5">
+  <div class="gallery">
       <!-- Gallery container -->
-      <div class="glide p-5">
+      <div class="glide">
           <h3>{{block.seo_title}}</h3>
+          <p class="lead">{{ block.content|safe }}</p>
           <!-- Slider wrapper -->
           <div class="glide__track" data-glide-el="track">
               <ul class="glide__slides">

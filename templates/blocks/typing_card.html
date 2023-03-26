@@ -1,0 +1,78 @@
+<style>
+    .typing-card {
+        position: relative;
+        height: 400px;
+        background: var(--bs-success);
+        color: var(--bs-light);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.12);
+    }
+
+    .typing-content {
+        position: relative;
+        text-align: center;
+    }
+
+    .typing-title {
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+</style>
+
+<div class="container-lg py-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="typing-card" id="typingCard">
+                <div class="typing-content">
+                    <h1 class="display-4 text-white typing-title" id="typingTitle" data-text="{{ block.title }}"></h1>
+                    <p class="lead text-white">{{ block.content|safe }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const typingTitle = document.getElementById("typingTitle");
+    const typingCard = document.getElementById("typingCard");
+    const text = typingTitle.getAttribute("data-text");
+    let index = 0;
+    let wasOutOfViewport = true;
+
+    function type() {
+        if (index < text.length) {
+            typingTitle.textContent += text[index];
+            index++;
+            setTimeout(type, 150);
+        }
+    }
+
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    function checkAnimation() {
+        if (isElementInViewport(typingCard)) {
+            if (wasOutOfViewport) {
+                wasOutOfViewport = false;
+                type();
+            }
+        } else {
+            wasOutOfViewport = true;
+            typingTitle.textContent = "";
+            index = 0;
+        }
+    }
+
+    window.addEventListener("scroll", checkAnimation);
+    checkAnimation();
+</script>

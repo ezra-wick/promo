@@ -1,0 +1,42 @@
+<style>
+    
+    .gradient-card {
+        position: relative;
+        height: 400px;
+        background-image: linear-gradient(135deg, var(--bs-primary) 0%, var(--bs-secondary) 50%, var(--bs-success) 100%),
+                          linear-gradient(135deg, var(--bs-info) 0%, var(--bs-warning) 50%, var(--bs-danger) 100%);
+        background-size: 200% 100%;
+        animation: gradient 5s linear infinite;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.12);
+    }
+
+    .gradient-content {
+        position: relative;
+        text-align: center;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 100% 0%, 0% 0%;
+        }
+        100% {
+            background-position: -100% 0%, 0% 0%;
+        }
+    }
+</style>
+
+<div class="container-lg py-5">
+<div class="row">
+    <div class="col-12">
+        <div class="gradient-card">
+            <div class="gradient-content">
+                <h1 class="display-4 text-white">{{ block.title }}</h1>
+                <p class="lead text-white">{{ block.content|safe }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

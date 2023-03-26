@@ -1,0 +1,84 @@
+<style>
+    .highlight-card {
+        position: relative;
+        height: 400px;
+        background: var(--bs-primary);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .highlight-content {
+        position: relative;
+        text-align: center;
+    }
+
+    .highlight-title,
+    .highlight-text {
+        display: inline;
+        background-image: linear-gradient(120deg, var(--bs-secondary) 0%, var(--bs-secondary) 100%);
+        background-repeat: no-repeat;
+        background-size: 100% 0;
+        background-position: 0 100%;
+        transition: background-size 0.25s ease;
+    }
+</style>
+
+<div class="container-fluid py-5">
+    <div class="row">
+        <div class="col-12">
+            <div class="highlight-card" id="highlightCard">
+                <div class="highlight-content">
+                    <h1 class="display-4 text-white highlight-title" id="highlightTitle">{{ block.title }}</h1><br>
+                    <p class="lead text-white mt-3 highlight-text" id="highlightText">{{ block.content|safe }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const highlightTitle = document.getElementById("highlightTitle");
+    const highlightText = document.getElementById("highlightText");
+    const highlightCard = document.getElementById("highlightCard");
+    let wasCardOutOfViewport = true;
+
+    function applyHighlightEffect() {
+        highlightTitle.style.backgroundSize = "100% 100%";
+        highlightTitle.style.color = "transparent";
+        highlightText.style.backgroundSize = "100% 100%";
+        highlightText.style.color = "transparent";
+    }
+
+    function resetHighlightEffect() {
+        highlightTitle.style.backgroundSize = "100% 0";
+        highlightTitle.style.color = "";
+        highlightText.style.backgroundSize = "100% 0";
+        highlightText.style.color = "";
+    }
+
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+    }
+
+    function checkHighlightAnimation() {
+        if (isElementInViewport(highlightCard)) {
+            if (wasCardOutOfViewport) {
+                wasCardOutOfViewport = false;
+                applyHighlightEffect();
+            }
+        } else {
+            wasCardOutOfViewport = true;
+            resetHighlightEffect();
+        }
+    }
+
+    window.addEventListener("scroll", checkHighlightAnimation);
+    checkHighlightAnimation();
+</script>
